@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
                 } else{
-                    Toast.makeText(this, "Task Failed!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Task did not go well!", Toast.LENGTH_SHORT).show()
 
                 }
             }
