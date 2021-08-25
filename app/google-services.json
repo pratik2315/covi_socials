@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582996356839",
+    "project_id": "covi-socials",
+    "storage_bucket": "covi-socials.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582996356839:android:0365747fa68063cbd9bc42",
+        "android_client_info": {
+          "package_name": "com.example.covisocials"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582996356839-8h5b3af6l3vetp3qit947raeb6jvikbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCvtxq6Z9uqc0hBHQE8U11iBlns3D-x2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582996356839-8h5b3af6l3vetp3qit947raeb6jvikbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
