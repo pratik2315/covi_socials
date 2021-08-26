@@ -12,7 +12,7 @@ object LoginUtil {
             return false
         }
 
-        if (userName.contains("@")){
+        if (userName.contains("#")){
             return false
         }
         return true
