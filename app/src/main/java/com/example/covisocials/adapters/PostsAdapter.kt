@@ -25,7 +25,7 @@ class PostsAdapter(val context:Context, val posts:List<Posts>) :
 
     inner class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         fun bind(post: Posts){
-            
+            //abc
         }
     }
 }
