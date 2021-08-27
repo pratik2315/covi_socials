@@ -18,9 +18,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-          val auth = FirebaseAuth.getInstance()
+        val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
-            startPostActivity()
+            startPostActivity()//This condition keeps the user logged in even after app is removed from bg(must be replaced with shared_pref)
         }
 
         binding.btnLogin.setOnClickListener {
@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            //takes the email and pass from user converts it to string and does the login task using this built in method frm firebase
             auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
                 binding.btnLogin.isEnabled = true
                 if (task.isSuccessful) {
@@ -43,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+
+        //to give the option to user for signing
         binding.signUpTv.setOnClickListener {
 
             startActivity(Intent(this, RegistrationActivity::class.java))
@@ -50,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    //starts the Posts Activity
     private fun startPostActivity() {
         startActivity(Intent(this, PostsActivity::class.java))
         finish()

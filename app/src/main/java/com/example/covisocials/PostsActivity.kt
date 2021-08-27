@@ -9,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.covisocials.adapters.PostsAdapter
 import com.example.covisocials.databinding.ActivityPostsBinding
 import com.example.covisocials.models.Posts
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,16 +20,22 @@ import com.google.firebase.firestore.Query
 class PostsActivity : AppCompatActivity() {
     private lateinit var fireStoreDb : FirebaseFirestore
     private lateinit var binding: ActivityPostsBinding
+    private lateinit var posts : MutableList<Posts>
+    private lateinit var postsAdapter : PostsAdapter
     private  val TAG = "PostsActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostsBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_posts)
+        setContentView(binding.root)
+
+        posts = mutableListOf()
+        postsAdapter = PostsAdapter(this, posts)
+        binding.rv.adapter = postsAdapter
+        binding.rv.layoutManager = LinearLayoutManager(this)
 
         fireStoreDb = FirebaseFirestore.getInstance()
         val postsNode = fireStoreDb.collection("posts")
-            .orderBy("current_time", Query.Direction.DESCENDING)
 
         postsNode.addSnapshotListener { value, error ->
             if (error!=null || value == null) {
@@ -34,9 +43,12 @@ class PostsActivity : AppCompatActivity() {
                 return@addSnapshotListener
             }
             var postList = value.toObjects(Posts::class.java)
-            for (post in postList){
-                Log.i(TAG, "Post ${post}")
-            }
+            posts.clear()
+            posts.addAll(postList)
+            postsAdapter.notifyDataSetChanged()
+//            for (post in postList){
+//                Log.i(TAG, "Post ${post}")
+//            }
         }
     }
 
