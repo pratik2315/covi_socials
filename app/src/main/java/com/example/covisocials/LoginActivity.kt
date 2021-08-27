@@ -18,8 +18,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser != null){
+          val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser != null) {
             startPostActivity()
         }
 
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
             binding.btnLogin.isEnabled = false
             val userEmail = binding.etEmail.text.toString()
             val userPassword = binding.etPassword.text.toString()
-            if (userEmail.isBlank() || userPassword.isBlank()){
+            if (userEmail.isBlank() || userPassword.isBlank()) {
                 Toast.makeText(this, "Input fields Cannot be Empty!", Toast.LENGTH_SHORT).show()
                 binding.btnLogin.isEnabled = true
                 return@setOnClickListener
@@ -35,19 +35,24 @@ class LoginActivity : AppCompatActivity() {
 
             auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
                 binding.btnLogin.isEnabled = true
-                if (task.isSuccessful){
-                    Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
+                if (task.isSuccessful) {
                     startPostActivity()
-                } else{
+                } else {
                     Toast.makeText(this, "Task Failed!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
+        binding.signUpTv.setOnClickListener {
+
+            startActivity(Intent(this, RegistrationActivity::class.java))
+            finish()
+        }
     }
 
-    private fun startPostActivity(){
-        Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
+    private fun startPostActivity() {
         startActivity(Intent(this, PostsActivity::class.java))
         finish()
     }
+
 }
