@@ -27,7 +27,7 @@ open class PostsActivity : AppCompatActivity() {
     private lateinit var posts : MutableList<Posts>
     private lateinit var postsAdapter : PostsAdapter
     private val TAG = "PostsActivity"
-    private val USERNAME_KEY = "prtk23"
+    private val USERNAME_KEY = "KEY"
     private var signedInUser : Users? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +41,7 @@ open class PostsActivity : AppCompatActivity() {
         binding.rv.layoutManager = LinearLayoutManager(this)
 
         fireStoreDb = FirebaseFirestore.getInstance()
+
 
         fireStoreDb.collection("users")
             .document(FirebaseAuth.getInstance().currentUser?.uid as String)
@@ -71,6 +72,11 @@ open class PostsActivity : AppCompatActivity() {
 //            for (post in postList){
 //                Log.i(TAG, "Post ${post}")
 //            }
+        }
+
+        binding.fab.setOnClickListener {
+            val intent = Intent(this, CreatePostActivity::class.java)
+            startActivity(intent)
         }
     }
 
