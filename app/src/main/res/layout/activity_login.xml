@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -18,14 +19,18 @@
 
         <EditText
             android:id="@+id/etEmail"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColorHint="#716E6E"
             android:layout_margin="20dp"
             android:inputType="textPersonName"
             android:hint="Enter your email.." />
 
         <EditText
+            android:textColorHint="#716E6E"
+            android:textColor="@color/black"
             android:id="@+id/etPassword"
             android:layout_margin="20dp"
             android:layout_width="match_parent"
@@ -47,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="Don't have an Account?" />
 
         <TextView

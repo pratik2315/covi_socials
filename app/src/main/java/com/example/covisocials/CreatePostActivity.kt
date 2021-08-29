@@ -1,6 +1,7 @@
 package com.example.covisocials
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class CreatePostActivity : AppCompatActivity() {
     private lateinit var storageReference : StorageReference
     private var signedInUser : Users? = null
     private val USERNAME_KEY = "KEY"
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
