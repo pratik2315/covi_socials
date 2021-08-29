@@ -59,7 +59,25 @@
             android:inputType="textPassword"
             android:hint="Enter Password.." />
 
-        <Button
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:ems="10"
+        android:hint="Enter Password.."
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/etAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:ems="10"
+        android:hint="Enter Password.."
+        android:inputType="textPassword" />
+
+    <Button
             android:id="@+id/btnSignUp"
             android:layout_gravity="center"
             android:layout_margin="20dp"

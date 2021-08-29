@@ -78,13 +78,6 @@ class CreatePostActivity : AppCompatActivity() {
                     .continueWithTask { photoUploadTask ->
                         picReference.downloadUrl
                     }
-                    .continueWithTask {
-                        val user = Users(
-                                signedInUser?.username as String,
-                                signedInUser?.age as Int
-                        )
-                        fireStoreDb.collection("users").add(user)
-                    }
                     .continueWithTask { postDownloadUrl ->
                         val post = Posts(
                                 binding.etCaption.text.toString(),
