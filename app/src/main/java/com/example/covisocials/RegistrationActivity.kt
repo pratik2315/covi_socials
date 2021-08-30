@@ -74,4 +74,5 @@ class RegistrationActivity : AppCompatActivity() {
             finish()
         }
 
-}
+
+    }
