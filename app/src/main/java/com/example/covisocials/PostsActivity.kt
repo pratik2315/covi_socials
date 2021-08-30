@@ -35,6 +35,7 @@ open class PostsActivity : AppCompatActivity() {
         binding = ActivityPostsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //here we setup adapter, postLists and recyclerview
         posts = mutableListOf()
         postsAdapter = PostsAdapter(this, posts)
