@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ProfileActivity : PostsActivity() {
 
 
+    //inflates the logout menu i created in the menu folder
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_logout, menu)
         return true
@@ -21,9 +22,9 @@ class ProfileActivity : PostsActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logout_click){
-            FirebaseAuth.getInstance().signOut()
+            FirebaseAuth.getInstance().signOut() //performs signout
             val logoutIntent = Intent(this, LoginActivity::class.java)
-            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK //some flags to remove previous activities frm the stack
             startActivity(logoutIntent)
         }
         return super.onOptionsItemSelected(item)

@@ -1,5 +1,6 @@
 package com.example.covisocials
 
+//some unit tests
 object LoginUtil {
     fun loginInput(
         userName : String,

@@ -31,7 +31,6 @@ class CreatePostActivity : AppCompatActivity() {
     private lateinit var storageReference : StorageReference
     private var signedInUser : Users? = null
     private val USERNAME_KEY = "KEY"
-    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,7 @@ class CreatePostActivity : AppCompatActivity() {
         fireStoreDb = FirebaseFirestore.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
+        //this firestore instance goes into the users node and gets the unique user id of the registered/logged in user
         fireStoreDb.collection("users")
                 .document(FirebaseAuth.getInstance().currentUser?.uid as String)
                 .get()
@@ -51,9 +51,12 @@ class CreatePostActivity : AppCompatActivity() {
                     Log.i(TAG, "Fail", exception)
                 }
 
+        //gets the image from the gallery
         binding.btnChooseImage.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
             galleryIntent.type = "image/*"
+
+            //this condition checks if our phone has a proper app to handle image selection
             if (galleryIntent.resolveActivity(packageManager)!=null){
                 startActivityForResult(galleryIntent, CODE)
             }
@@ -64,6 +67,11 @@ class CreatePostActivity : AppCompatActivity() {
         }
     }
 
+
+    /**checks some conditions, uploads and downloads the user selected image file
+     * updates the user entered data in firestore "posts" and "users" node
+     * and finally sets the edittext and imageview empty
+     * */
     private fun handleSubmitButton() {
         if (picUri == null){
             Toast.makeText(this, "No image selected!", Toast.LENGTH_SHORT).show()
@@ -75,26 +83,26 @@ class CreatePostActivity : AppCompatActivity() {
         try {
             val picUpUri = picUri as Uri
 
-            val picReference = storageReference.child("images/${System.currentTimeMillis()}-photo.jpg")
+            val picReference = storageReference.child("images/${System.currentTimeMillis()}-photo.jpg") //user uploads uri(image) into firebase storage
             picReference.putFile(picUpUri)
-                    .continueWithTask { photoUploadTask ->
-                        picReference.downloadUrl
+                    .continueWithTask {
+                        picReference.downloadUrl // downloads the same url
                     }
                     .continueWithTask { postDownloadUrl ->
                         val post = Posts(
                                 binding.etCaption.text.toString(),
                                 System.currentTimeMillis(),
                                 postDownloadUrl.result.toString(),
-                                signedInUser
+                                signedInUser // data is set to the ui
                         )
-                        fireStoreDb.collection("posts").add(post)
+                        fireStoreDb.collection("posts").add(post) // data updated in the node
                     }.addOnCompleteListener { postCreationInDB ->
                         if (!postCreationInDB.isSuccessful) {
                             Toast.makeText(this, "Failed to upload photo to firebase storage", Toast.LENGTH_SHORT).show()
                         }
 
                         binding.etCaption.text.clear()
-                        binding.imagePost.setImageResource(0)
+                        binding.imagePost.setImageResource(0) //imageview and textview cleared
                         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, ProfileActivity::class.java)
                         intent.putExtra(USERNAME_KEY, signedInUser?.username)
@@ -107,6 +115,8 @@ class CreatePostActivity : AppCompatActivity() {
 
     }
 
+
+    //some more condition checkinga and then we set the uri image to our imageview image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CODE){

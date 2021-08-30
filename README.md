@@ -8,4 +8,6 @@ Its more important for covid affected patients who are essentially shut down fro
 share their stories, track their progress and show it to the outside world. This practice also helps to create awareness about the day to
 day lives of covid hospitalized patients.
 
+The app is hosted on Microsoft App centre mobile devops services.
+
  

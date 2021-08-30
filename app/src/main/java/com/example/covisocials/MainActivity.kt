@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //ms app centre dependancy code
         AppCenter.start(
             application, "b07a9072-b9bb-4718-bc2f-a3bdcf93f7a8",
             Analytics::class.java, Crashes::class.java

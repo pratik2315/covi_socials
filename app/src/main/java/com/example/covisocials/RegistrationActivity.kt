@@ -41,13 +41,15 @@ class RegistrationActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
                 binding.btnSignUp.isEnabled = true
                 if (task.isSuccessful){
-                    var userId = auth.currentUser?.uid as String
-                    var documentReference = fireStoreDb.collection("users").document(userId)
 
-                    //val user = mapOf<String, Objects>()
+                    var userId = auth.currentUser?.uid as String //gets the unique user id from the registered user
+                    var documentReference = fireStoreDb.collection("users").document(userId) //points to the "users" collection in fstore
+
                     val user:HashMap<String, String> = HashMap<String, String>()
                     user.put("username", username)
-                    user.put("age", age)
+                    user.put("age", age) //collects the username and age field from the user
+
+                    //and sets those values to the firestore values
                     documentReference.set(user).addOnSuccessListener {
                         Log.i(TAG, "user id: $userId")
                     }.addOnFailureListener{ exception ->
